@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using FluentAssertions;
 using KeepKeeper.Common;
 using KeepKeeper.Companies;
@@ -9,13 +8,13 @@ using NSubstitute;
 using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
-namespace KeepKeeper.Tests
+namespace KeepKeeper.Tests.CompanyServiceTests
 {
     public class CreateCompany
     {
         [Theory]
         [AutoNSubstituteData]
-        public void company_service_create_calls_event_factory_create(
+        public void calls_event_factory_create(
             [Frozen]IEventFactory factory, 
             CompanyService sut,
             CreateCompanyData data)
@@ -27,32 +26,10 @@ namespace KeepKeeper.Tests
             factory.Received()
                 .CreateCompanyCreatedEvent(data.CompanyId, data.Name);
         }
-
+        
         [Theory]
         [AutoNSubstituteData]
-        public void event_factory_create_company_created_event_returns_proper_event(
-            EventFactory sut,
-            Guid companyId, 
-            string name)
-        {
-            // arrange
-            var expected = new CompanyCreated { EntityId = companyId, Name = name };
-
-            // act
-            var actual = sut.CreateCompanyCreatedEvent(companyId, name);
-
-            // assert
-            actual.Id.Should().NotBeEmpty();
-            actual.Timestamp.Should().BeCloseTo(DateTime.UtcNow);
-            
-            actual.ShouldBeEquivalentTo(expected, options => options
-                    .Excluding(o => o.Id)
-                    .Excluding(o => o.Timestamp));
-        }
-
-        [Theory]
-        [AutoNSubstituteData]
-        public void compny_service_create_calls_event_store_save(
+        public void calls_event_store_save(
             [Frozen]IEventRepository repo,
             [Frozen]IEventFactory factory,
             CompanyService sut,
@@ -73,7 +50,7 @@ namespace KeepKeeper.Tests
 
         [Theory]
         [AutoNSubstituteData]
-        public void compny_service_create_calls_event_get_all_events_by_entity_id(
+        public void calls_event_get_all_events_by_entity_id(
             [Frozen]IEventRepository repo,
             [Frozen]IEventFactory factory,
             CompanyService sut,
@@ -88,7 +65,7 @@ namespace KeepKeeper.Tests
 
         [Theory]
         [AutoNSubstituteData]
-        public void compny_service_create_returns_new_company(
+        public void returns_new_company(
             [Frozen]IEventRepository repo,
             [Frozen]IEventFactory factory,
             CompanyService sut,

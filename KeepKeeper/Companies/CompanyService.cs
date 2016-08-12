@@ -6,6 +6,8 @@ namespace KeepKeeper.Companies
     public interface ICompanyService
     {
         Company CreateCompany(CreateCompanyData createData);
+
+        Company ChangeName(ChangeCompanyNameData data);
     }
 
     public class CompanyService: ICompanyService
@@ -32,6 +34,14 @@ namespace KeepKeeper.Companies
             var events = eventRepository.GetAllEventsForEntity(createData.CompanyId);
 
             return new Company(events);
+        }
+
+        public Company ChangeName(ChangeCompanyNameData renameData)
+        {
+            var @event = factory.CreateCompanyRenamedEvent(
+                renameData.NewName);
+
+            return null;
         }
     }
 }

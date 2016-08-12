@@ -44,11 +44,12 @@
     <Compile Include="Common\Event.cs" />
     <Compile Include="Common\EventFactory.cs" />
     <Compile Include="Common\Infrastructure\AsDynamic.cs" />
-    <Compile Include="Common\WriteEventRepository.cs" />
+    <Compile Include="Common\EventRepository.cs" />
     <Compile Include="Companies\Dtos.cs" />
     <Compile Include="Companies\Company.cs" />
     <Compile Include="Companies\CompanyService.cs" />
     <Compile Include="Companies\Events\CompanyCreated.cs" />
+    <Compile Include="Companies\Events\CompanyRenamed.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

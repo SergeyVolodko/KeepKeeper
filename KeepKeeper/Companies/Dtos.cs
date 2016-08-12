@@ -8,4 +8,9 @@ namespace KeepKeeper.Companies
 
         public string Name { get; set; }
     }
+
+    public class ChangeCompanyNameData
+    {
+        public string NewName { get; set; }
+    }
 }

@@ -6,6 +6,7 @@ namespace KeepKeeper.Common
     public interface IEventFactory
     {
         CompanyCreated CreateCompanyCreatedEvent(Guid companyId, string name);
+        CompanyRenamed CreateCompanyRenamedEvent(string newName);
     }
 
     public class EventFactory: IEventFactory
@@ -22,6 +23,11 @@ namespace KeepKeeper.Common
                 EntityId = companyId,
                 Name = name
             };
+        }
+
+        public CompanyRenamed CreateCompanyRenamedEvent(string newName)
+        {
+            throw new NotImplementedException();
         }
     }
 }

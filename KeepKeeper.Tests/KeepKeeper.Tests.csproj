@@ -98,7 +98,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateCompany.cs" />
+    <Compile Include="CompanyServiceTests\ChangeName.cs" />
+    <Compile Include="CompanyServiceTests\CreateCompany.cs" />
+    <Compile Include="EventsFactoryTests.cs" />
     <Compile Include="Infrastructure\AutoNSubstituteDataAttribute.cs" />
     <Compile Include="Infrastructure\ControllerAutoDataAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
