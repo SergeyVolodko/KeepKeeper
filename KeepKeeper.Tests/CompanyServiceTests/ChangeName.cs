@@ -25,7 +25,6 @@ namespace KeepKeeper.Tests.CompanyServiceTests
                 .CreateCompanyRenamedEvent(data.NewName);
         }
 
-
         [Theory]
         [AutoNSubstituteData]
         public void calls_event_store_save(

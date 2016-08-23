@@ -41,6 +41,10 @@ namespace KeepKeeper.Companies
             var @event = factory.CreateCompanyRenamedEvent(
                 renameData.NewName);
 
+            eventRepository.Save(@event);
+
+
+
             return null;
         }
     }
