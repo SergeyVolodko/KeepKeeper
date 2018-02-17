@@ -32,20 +32,23 @@ namespace KeepKeeper.Companies
 			}
 		}
 
-		public static Company Create(CompanyId id, TenantId owner, TenantId createdBy, DateTimeOffset createdAt)
+		public static Company Create(
+			Name name, 
+			VatNumber vatNumber, 
+			TenantId owner,
+			DateTimeOffset createdAt)
 		{
 			var comapny = new Company();
 			comapny.Apply(new Events.V1.CompanyCreated
 			{
-				Id = id,
+				Id = Guid.NewGuid(),
 				Owner = owner,
-				CreatedBy = createdBy,
 				CreatedAt = createdAt
 			});
 			return comapny;
 		}
 
-		public void Rename(Name name, DateTimeOffset renamedAt, TenantId renamedBy)
+		public void Rename(Name newName, DateTimeOffset renamedAt)
 		{
 			if (Version == -1)
 				throw new Exceptions.ComapnyNotFoundException();
@@ -53,13 +56,12 @@ namespace KeepKeeper.Companies
 			Apply(new Events.V1.CompanyRenamed
 			{
 				Id = Id,
-				Name = name,
-				RenamedAt = renamedAt,
-				RenamedBy = renamedBy
+				Name = newName,
+				RenamedAt = renamedAt
 			});
 		}
 
-		public void ChangeVatNumber(VatNumber vatNumber, DateTimeOffset renamedAt, TenantId renamedBy)
+		public void ChangeVatNumber(VatNumber vatNumber, DateTimeOffset renamedAt)
 		{
 			if (Version == -1)
 				throw new Exceptions.ComapnyNotFoundException();
@@ -68,8 +70,7 @@ namespace KeepKeeper.Companies
 			{
 				Id = Id,
 				VatNumber = vatNumber,
-				RenamedAt = renamedAt,
-				RenamedBy = renamedBy
+				RenamedAt = renamedAt
 			});
 		}
 	}

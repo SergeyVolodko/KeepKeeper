@@ -13,7 +13,6 @@ namespace KeepKeeper.Companies
 				public string Name { get; set; }
 				public string VatNumber { get; set; }
 				public DateTimeOffset CreatedAt { get; set; }
-				public Guid CreatedBy { get; set; }
 
 				public override string ToString()
 					=> $"Company {Id} created.";
@@ -24,7 +23,6 @@ namespace KeepKeeper.Companies
 				public Guid Id { get; set; }
 				public string Name { get; set; }
 				public DateTimeOffset RenamedAt { get; set; }
-				public Guid RenamedBy { get; set; }
 
 				public override string ToString()
 					=> $"Comapny {Id} renamed to '{(Name?.Length > 25 ? $"{Name?.Substring(0, 22)}..." : Name)}'";
@@ -35,7 +33,6 @@ namespace KeepKeeper.Companies
 				public Guid Id { get; set; }
 				public string VatNumber { get; set; }
 				public DateTimeOffset RenamedAt { get; set; }
-				public Guid RenamedBy { get; set; }
 
 				public override string ToString()
 					=> $"Comapny {Id} VatNumber changed to '{VatNumber}'";
