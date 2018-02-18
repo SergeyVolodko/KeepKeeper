@@ -10,7 +10,9 @@ namespace KeepKeeper.Companies
 
 		private VatNumber vatNumber;
 
-		// add address
+		private Address address;
+
+		private Picture logo;
 
 		protected override void When(object e)
 		{
@@ -61,7 +63,7 @@ namespace KeepKeeper.Companies
 			});
 		}
 
-		public void ChangeVatNumber(VatNumber vatNumber, DateTimeOffset renamedAt)
+		public void ChangeVatNumber(VatNumber vatNumber, DateTimeOffset chamgedAt)
 		{
 			if (Version == -1)
 				throw new Exceptions.ComapnyNotFoundException();
@@ -70,7 +72,7 @@ namespace KeepKeeper.Companies
 			{
 				Id = Id,
 				VatNumber = vatNumber,
-				RenamedAt = renamedAt
+				ChangedAt = chamgedAt
 			});
 		}
 	}

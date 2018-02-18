@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeepKeeper", "KeepKeeper\Ke
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeepKeeper.Api", "..\KeepKeeper.Api\KeepKeeper.Api.csproj", "{22810A8A-9987-407A-979E-9DD2306EF3D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeepKeeper.Framework", "..\KeepKeeper.Framework\KeepKeeper.Framework.csproj", "{9AD34D27-8F7C-4720-90F4-3DDA95C64E22}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{22810A8A-9987-407A-979E-9DD2306EF3D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22810A8A-9987-407A-979E-9DD2306EF3D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22810A8A-9987-407A-979E-9DD2306EF3D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AD34D27-8F7C-4720-90F4-3DDA95C64E22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AD34D27-8F7C-4720-90F4-3DDA95C64E22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AD34D27-8F7C-4720-90F4-3DDA95C64E22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AD34D27-8F7C-4720-90F4-3DDA95C64E22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

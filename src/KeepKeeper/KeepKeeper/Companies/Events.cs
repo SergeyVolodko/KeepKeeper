@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KeepKeeper.Common;
+using System;
 
 namespace KeepKeeper.Companies
 {
@@ -32,10 +33,45 @@ namespace KeepKeeper.Companies
 			{
 				public Guid Id { get; set; }
 				public string VatNumber { get; set; }
-				public DateTimeOffset RenamedAt { get; set; }
+				public DateTimeOffset ChangedAt { get; set; }
 
 				public override string ToString()
 					=> $"Comapny {Id} VatNumber changed to '{VatNumber}'";
+			}
+
+			public class CompanyLogoAdded
+			{
+				public Guid Id { get; set; }
+				public Picture Picture { get; set; }
+				public DateTimeOffset AddedAt { get; set; }
+			}
+
+			public class CompanyLogoRemoved
+			{
+				public Guid Id { get; set; }
+				public Picture Picture { get; set; }
+				public DateTimeOffset RemovedAt { get; set; }
+			}
+
+			public class CompanyAddressAdded
+			{
+				public Guid Id { get; set; }
+				public Address Address { get; set; }
+				public DateTimeOffset AddedAt { get; set; }
+			}
+
+			public class CompanyAddressChanged
+			{
+				public Guid Id { get; set; }
+				public Address Address { get; set; }
+				public DateTimeOffset ChangeddAt { get; set; }
+			}
+
+			public class CompanyAddressRemoved
+			{
+				public Guid Id { get; set; }
+				public Address Address { get; set; }
+				public DateTimeOffset RemoveddAt { get; set; }
 			}
 		}
 	}
