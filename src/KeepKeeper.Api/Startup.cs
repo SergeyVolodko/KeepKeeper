@@ -24,6 +24,7 @@ namespace KeepKeeper.Api
 			{
 				c.SwaggerDoc("v1", new Info { Title = "Event Log API", Version = "v1" });
 			});
+			
 			services.AddSingleton<IAggregateStore>(new GesAggregateStore(
 				(type, id) => $"{type.Name}-{id}",
 				esConnection,
@@ -37,10 +38,11 @@ namespace KeepKeeper.Api
 			if (env.IsDevelopment())
 				app.UseDeveloperExceptionPage();
 
-			app.UseMvcWithDefaultRoute();
+			//app.UseMvcWithDefaultRoute();
+			app.UseStaticFiles();
 
-			app.UseSwagger();
-			app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Event Log API V1"); });
+			app.UseSwagger()
+				.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/swagger/v1/swagger.json", "Event Log API V1"); });
 		}
 
 		private static TypeMapper ConfigureTypeMapper()

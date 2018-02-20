@@ -7,6 +7,7 @@ namespace KeepKeeper.Api
 	public class TestApi : Controller
 	{
 		[HttpGet]
+		[Route("")]
 		public DateTime Get() => DateTime.Now;
 	}
 }

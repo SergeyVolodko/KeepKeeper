@@ -12,7 +12,7 @@ namespace KeepKeeper.Companies
 
 		private Address address;
 
-		private Picture logo;
+		//private Picture logo;
 
 		protected override void When(object e)
 		{
@@ -37,17 +37,17 @@ namespace KeepKeeper.Companies
 		public static Company Create(
 			Name name, 
 			VatNumber vatNumber, 
-			TenantId owner,
+			TenantId tenantId,
 			DateTimeOffset createdAt)
 		{
-			var comapny = new Company();
-			comapny.Apply(new Events.V1.CompanyCreated
+			var company = new Company();
+			company.Apply(new Events.V1.CompanyCreated
 			{
 				Id = Guid.NewGuid(),
-				Owner = owner,
+				TenantId = tenantId,
 				CreatedAt = createdAt
 			});
-			return comapny;
+			return company;
 		}
 
 		public void Rename(Name newName, DateTimeOffset renamedAt)
@@ -73,6 +73,45 @@ namespace KeepKeeper.Companies
 				Id = Id,
 				VatNumber = vatNumber,
 				ChangedAt = chamgedAt
+			});
+		}
+
+		public void AddAddress(Address address, DateTimeOffset addedAt)
+		{
+			if (Version == -1)
+				throw new Exceptions.ComapnyNotFoundException();
+
+			Apply(new Events.V1.CompanyAddressAdded
+			{
+				Id = Id,
+				Address = address,
+				AddedAt = addedAt
+			});
+		}
+
+		public void ChangeAddress(Address newAddress, DateTimeOffset changedAt)
+		{
+			if (Version == -1)
+				throw new Exceptions.ComapnyNotFoundException();
+
+			Apply(new Events.V1.CompanyAddressChanged
+			{
+				Id = Id,
+				Address = newAddress,
+				ChangedAt = changedAt
+			});
+		}
+
+		public void RemoveAddress(DateTimeOffset removedAt)
+		{
+			if (Version == -1)
+				throw new Exceptions.ComapnyNotFoundException();
+
+			Apply(new Events.V1.CompanyAddressChanged
+			{
+				Id = Id,
+				Address = null,
+				ChangedAt = removedAt
 			});
 		}
 	}

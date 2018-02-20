@@ -40,6 +40,56 @@ namespace KeepKeeper.Api.Contarcts
 
 				public override string ToString() => $"Changing company VAT number {CompanyId}";
 			}
+
+
+			public class AddAddress
+			{
+				public Guid CompanyId { get; set; }
+
+				public DateTimeOffset AddedAt { get; set; }
+
+				public string AddressLine1 { get; set; }
+
+				public string AddressLine2 { get; set; }
+
+				public string AddressPostCode { get; set; }
+
+				public string AddressCity { get; set; }
+
+				public string AddressCountry { get; set; }
+
+				public override string ToString() => $"Adding new address to company {CompanyId}";
+			}
+
+			public class ChangeAddress
+			{
+
+				public Guid CompanyId { get; set; }
+
+				public DateTimeOffset ChangedAt { get; set; }
+
+				public string AddressLine1 { get; set; }
+
+				public string AddressLine2 { get; set; }
+
+				public string AddressPostCode { get; set; }
+
+				public string AddressCity { get; set; }
+
+				public string AddressCountry { get; set; }
+
+				public override string ToString() => $"Changing address of company {CompanyId}";
+			}
+
+			public class RemoveAddress
+			{
+
+				public Guid CompanyId { get; set; }
+
+				public DateTimeOffset RemovedAt { get; set; }
+
+				public override string ToString() => $"Removing address of company {CompanyId}";
+			}
 		}
 	}
 }

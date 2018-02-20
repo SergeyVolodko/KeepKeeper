@@ -1,6 +1,8 @@
 ﻿using KeepKeeper.Api.Contarcts;
+using KeepKeeper.Common;
 using KeepKeeper.Companies;
 using KeepKeeper.Framework;
+using System;
 using System.Threading.Tasks;
 
 namespace KeepKeeper.Api.CompaniesApi
@@ -32,10 +34,35 @@ namespace KeepKeeper.Api.CompaniesApi
 			await store.Save(company);
 		}
 
-		public async Task Handle(CompanyCommands.V1.ChangeVatNumber command)
+		/// <summary>
+		/// Optimized
+		/// </summary>
+
+
+		public Task Handle(CompanyCommands.V1.ChangeVatNumber command)
+			=> HandleUpdate(command.CompanyId, company =>
+					company.ChangeVatNumber(command.NewVatNumber, command.ChangedAt));
+
+		public Task Handle(CompanyCommands.V1.AddAddress c)
+			=> HandleUpdate(c.CompanyId, company =>
+						company.AddAddress(
+							new Address(c.AddressLine1, c.AddressLine2, c.AddressCity, c.AddressPostCode, c.AddressCountry),
+							c.AddedAt));
+
+		public Task Handle(CompanyCommands.V1.ChangeAddress c)
+			=> HandleUpdate(c.CompanyId, company =>
+						company.ChangeAddress(
+							new Address(c.AddressLine1, c.AddressLine2, c.AddressCity, c.AddressPostCode, c.AddressCountry),
+							c.ChangedAt));
+
+		public Task Handle(CompanyCommands.V1.RemoveAddress command)
+			=> HandleUpdate(command.CompanyId, company =>
+						company.RemoveAddress(command.RemovedAt));
+
+		private async Task HandleUpdate(Guid id, Action<Company> update)
 		{
-			var company = await store.Load<Company>(command.CompanyId.ToString());
-			company.ChangeVatNumber(command.NewVatNumber, command.ChangedAt);
+			var company = await store.Load<Company>(id.ToString());
+			update(company);
 			await store.Save(company);
 		}
 	}

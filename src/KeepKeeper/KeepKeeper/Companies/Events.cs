@@ -3,14 +3,14 @@ using System;
 
 namespace KeepKeeper.Companies
 {
-    public static class Events
+	public static class Events
 	{
 		public static class V1
 		{
 			public class CompanyCreated
 			{
 				public Guid Id { get; set; }
-				public Guid Owner { get; set; }
+				public Guid TenantId { get; set; }
 				public string Name { get; set; }
 				public string VatNumber { get; set; }
 				public DateTimeOffset CreatedAt { get; set; }
@@ -39,19 +39,19 @@ namespace KeepKeeper.Companies
 					=> $"Comapny {Id} VatNumber changed to '{VatNumber}'";
 			}
 
-			public class CompanyLogoAdded
-			{
-				public Guid Id { get; set; }
-				public Picture Picture { get; set; }
-				public DateTimeOffset AddedAt { get; set; }
-			}
+			//public class CompanyLogoAdded
+			//{
+			//	public Guid Id { get; set; }
+			//	public Picture Picture { get; set; }
+			//	public DateTimeOffset AddedAt { get; set; }
+			//}
 
-			public class CompanyLogoRemoved
-			{
-				public Guid Id { get; set; }
-				public Picture Picture { get; set; }
-				public DateTimeOffset RemovedAt { get; set; }
-			}
+			//public class CompanyLogoRemoved
+			//{
+			//	public Guid Id { get; set; }
+			//	public Picture Picture { get; set; }
+			//	public DateTimeOffset RemovedAt { get; set; }
+			//}
 
 			public class CompanyAddressAdded
 			{
@@ -64,15 +64,14 @@ namespace KeepKeeper.Companies
 			{
 				public Guid Id { get; set; }
 				public Address Address { get; set; }
-				public DateTimeOffset ChangeddAt { get; set; }
+				public DateTimeOffset ChangedAt { get; set; }
 			}
 
-			public class CompanyAddressRemoved
-			{
-				public Guid Id { get; set; }
-				public Address Address { get; set; }
-				public DateTimeOffset RemoveddAt { get; set; }
-			}
+			//public class CompanyAddressRemoved
+			//{
+			//	public Guid Id { get; set; }
+			//	public DateTimeOffset RemoveddAt { get; set; }
+			//}
 		}
 	}
 }

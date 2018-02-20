@@ -46,6 +46,7 @@ namespace KeepKeeper.Api
 				.Build();
 
 			return WebHost.CreateDefaultBuilder(args)
+				.UseIISIntegration()
 				.UseConfiguration(config)
 				.UseStartup<Startup>()
 				.UseSerilog()
