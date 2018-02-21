@@ -1,10 +1,17 @@
 ﻿using KeepKeeper.Api.CompaniesApi;
+using KeepKeeper.Api.CompaniesApi.Projections;
 using KeepKeeper.Companies;
 using KeepKeeper.Framework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Raven.Client.Documents;
+using Raven.Client.Documents.Session;
+using Raven.Client.ServerWide;
+using Raven.Client.ServerWide.Operations;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace KeepKeeper.Api
@@ -31,6 +38,16 @@ namespace KeepKeeper.Api
 				new JsonNetSerializer(),
 				typeMapper
 			));
+			var openSession = ConfgiureRavenDb();
+
+			var projectionManager = new ProjectionManager(
+				esConnection,
+				new RavenCheckpointStore(openSession),
+				new JsonNetSerializer(),
+				typeMapper,
+				new[] { new CompanyShort(openSession), });
+			await projectionManager.Activate();
+
 			services.AddTransient<CompanyService, CompanyService>();
 
 			services.AddMvc();
@@ -58,6 +75,23 @@ namespace KeepKeeper.Api
 			mapper.Map<Events.V1.CompanyAddressChanged>("CompanyAddressChanged");
 
 			return mapper;
+		}
+
+		private Func<IAsyncDocumentSession> ConfgiureRavenDb()
+		{
+			const string dbName = "KeepKeeper";
+
+			var store = new DocumentStore
+			{
+				Urls = new[] { "http://localhost:1710" },
+				Database = dbName
+			}.Initialize();
+
+			var databaseNames = store.Maintenance.Server.Send(new GetDatabaseNamesOperation(0, 25));
+			if (!databaseNames.Contains(dbName))
+				store.Maintenance.Server.Send(new CreateDatabaseOperation(new DatabaseRecord(dbName)));
+
+			return () => store.OpenAsyncSession();
 		}
 	}
 }
