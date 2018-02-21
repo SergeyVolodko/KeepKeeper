@@ -10,7 +10,7 @@ namespace KeepKeeper.Api.Contarcts
 			{
 				public Guid OwnerId { get; set; }
 				
-				public DateTimeOffset CreatedAt { get; set; }
+				//public DateTimeOffset CreatedAt { get; set; }
 
 				public string CompanyName { get; set; }
 
@@ -23,7 +23,7 @@ namespace KeepKeeper.Api.Contarcts
 			{
 				public Guid CompanyId { get; set; }
 
-				public DateTimeOffset RenamedAt { get; set; }
+				//public DateTimeOffset RenamedAt { get; set; }
 
 				public string NewName { get; set; }
 

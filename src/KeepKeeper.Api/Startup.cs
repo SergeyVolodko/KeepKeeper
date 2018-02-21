@@ -1,4 +1,5 @@
-﻿using KeepKeeper.Companies;
+﻿using KeepKeeper.Api.CompaniesApi;
+using KeepKeeper.Companies;
 using KeepKeeper.Framework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,7 +20,6 @@ namespace KeepKeeper.Api
 			var esConnection = await Defaults.GetConnection();
 			var typeMapper = ConfigureTypeMapper();
 
-			services.AddMvc();
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new Info { Title = "Event Log API", Version = "v1" });
@@ -28,8 +28,12 @@ namespace KeepKeeper.Api
 			services.AddSingleton<IAggregateStore>(new GesAggregateStore(
 				(type, id) => $"{type.Name}-{id}",
 				esConnection,
+				new JsonNetSerializer(),
 				typeMapper
 			));
+			services.AddTransient<CompanyService, CompanyService>();
+
+			services.AddMvc();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,19 +42,18 @@ namespace KeepKeeper.Api
 			if (env.IsDevelopment())
 				app.UseDeveloperExceptionPage();
 
-			//app.UseMvcWithDefaultRoute();
-			app.UseStaticFiles();
+			app.UseMvcWithDefaultRoute();
 
 			app.UseSwagger()
-				.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/swagger/v1/swagger.json", "Event Log API V1"); });
+				.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Event Log API V1"); });
 		}
 
 		private static TypeMapper ConfigureTypeMapper()
 		{
 			var mapper = new TypeMapper();
-			//mapper.Map<Events.V1.CompanyCreated>("CompanyCreated");
-			//mapper.Map<Events.V1.CompanyRenamed>("CompanyRenamed");
-			//mapper.Map<Events.V1.CompanyVatNumberChanged>("CompanyVatNumberChanged");
+			mapper.Map<Events.V1.CompanyCreated>("CompanyCreated");
+			mapper.Map<Events.V1.CompanyRenamed>("CompanyRenamed");
+			mapper.Map<Events.V1.CompanyVatNumberChanged>("CompanyVatNumberChanged");
 
 			return mapper;
 		}

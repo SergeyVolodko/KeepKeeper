@@ -18,19 +18,19 @@ namespace KeepKeeper.Api.CompaniesApi
 
 		public Task Handle(CompanyCommands.V1.Create command)
 		{
-			var ad = Company.Create(
+			var company = Company.Create(
 				command.CompanyName,
 				command.VatNumber,
 				command.OwnerId,
-				command.CreatedAt);
+				DateTimeOffset.UtcNow);
 
-			return store.Save(ad);
+			return store.Save(company);
 		}
 
 		public async Task Handle(CompanyCommands.V1.Rename command)
 		{
 			var company = await store.Load<Company>(command.CompanyId.ToString());
-			company.Rename(command.NewName, command.RenamedAt);
+			company.Rename(command.NewName, DateTimeOffset.UtcNow);
 			await store.Save(company);
 		}
 

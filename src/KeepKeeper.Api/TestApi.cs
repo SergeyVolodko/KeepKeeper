@@ -3,11 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KeepKeeper.Api
 {
-	[Route("/test")]
 	public class TestApi : Controller
 	{
 		[HttpGet]
-		[Route("")]
+		[Route("test")]
 		public DateTime Get() => DateTime.Now;
 	}
 }

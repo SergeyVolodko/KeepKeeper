@@ -8,11 +8,12 @@ namespace KeepKeeper.Framework
 		/// <summary>
 		///     Loads and returns an aggregate by id, from the store.
 		/// </summary>
-		Task<T> Load<T>(string aggregateId) where T : Aggregate, new();
+		Task<T> Load<T>(string aggregateId, CancellationToken cancellationToken = default) where T : Aggregate, new();
 
 		/// <summary>
 		///     Saves changes to the store.
 		/// </summary>
-		Task Save<T>(T aggregate) where T : Aggregate;
+		Task<(long NextExpectedVersion, long LogPosition, long CommitPosition)> Save<T>(
+			T aggregate, CancellationToken cancellationToken = default) where T : Aggregate;
 	}
 }

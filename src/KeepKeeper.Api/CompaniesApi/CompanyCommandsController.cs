@@ -18,7 +18,7 @@ namespace KeepKeeper.Api.CompaniesApi
 
 		[HttpPost]
 		[Route("")]
-		public void CreateCompany(
+		public void CreateCompany([FromBody]
 			CompanyCommands.V1.Create createCommand)
 		{
 			service.Handle(createCommand);
@@ -26,7 +26,7 @@ namespace KeepKeeper.Api.CompaniesApi
 
 		[HttpPost]
 		[Route("/rename")]
-		public async void RenameCompany(
+		public async void RenameCompany([FromBody]
 			CompanyCommands.V1.Rename renameCommand)
 		{
 			await service.Handle(renameCommand);
@@ -34,7 +34,7 @@ namespace KeepKeeper.Api.CompaniesApi
 
 		[HttpPost]
 		[Route("/change_vat")]
-		public Task<IActionResult> ChangeCompanyVatNumber(CompanyCommands.V1.ChangeVatNumber changeVatCommand) 
+		public Task<IActionResult> ChangeCompanyVatNumber(CompanyCommands.V1.ChangeVatNumber changeVatCommand)
 			=> HandleOrThrow(changeVatCommand, c => service.Handle(c));
 
 		[HttpPost]
