@@ -34,22 +34,26 @@ namespace KeepKeeper.Api.CompaniesApi
 
 		[HttpPost]
 		[Route("/change_vat")]
-		public Task<IActionResult> ChangeCompanyVatNumber(CompanyCommands.V1.ChangeVatNumber changeVatCommand)
+		public Task<IActionResult> ChangeCompanyVatNumber([FromBody]
+			CompanyCommands.V1.ChangeVatNumber changeVatCommand)
 			=> HandleOrThrow(changeVatCommand, c => service.Handle(c));
 
 		[HttpPost]
 		[Route("/add_address")]
-		public Task<IActionResult> AddCompanyAddress(CompanyCommands.V1.AddAddress addAddressCommand)
+		public Task<IActionResult> AddCompanyAddress([FromBody]
+			CompanyCommands.V1.AddAddress addAddressCommand)
 			=> HandleOrThrow(addAddressCommand, c => service.Handle(c));
 
 		[HttpPost]
 		[Route("/change_address")]
-		public Task<IActionResult> ChangeCompanyAddress(CompanyCommands.V1.ChangeAddress changeAddressCommand)
+		public Task<IActionResult> ChangeCompanyAddress([FromBody]
+			CompanyCommands.V1.ChangeAddress changeAddressCommand)
 			=> HandleOrThrow(changeAddressCommand, c => service.Handle(c));
 
 		[HttpPost]
 		[Route("/remove_address")]
-		public Task<IActionResult> RemoveCompanyAddress(CompanyCommands.V1.RemoveAddress removeAddressCommand)
+		public Task<IActionResult> RemoveCompanyAddress([FromBody]
+			CompanyCommands.V1.RemoveAddress removeAddressCommand)
 			=> HandleOrThrow(removeAddressCommand, c => service.Handle(c));
 
 		private async Task<IActionResult> HandleOrThrow<T>(T request, Func<T, Task> handler)

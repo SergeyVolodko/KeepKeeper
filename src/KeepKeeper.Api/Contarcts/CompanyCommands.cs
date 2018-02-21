@@ -34,7 +34,7 @@ namespace KeepKeeper.Api.Contarcts
 			{
 				public Guid CompanyId { get; set; }
 
-				public DateTimeOffset ChangedAt { get; set; }
+				//public DateTimeOffset ChangedAt { get; set; }
 
 				public string NewVatNumber { get; set; }
 
@@ -46,7 +46,7 @@ namespace KeepKeeper.Api.Contarcts
 			{
 				public Guid CompanyId { get; set; }
 
-				public DateTimeOffset AddedAt { get; set; }
+				//public DateTimeOffset AddedAt { get; set; }
 
 				public string AddressLine1 { get; set; }
 
@@ -63,10 +63,9 @@ namespace KeepKeeper.Api.Contarcts
 
 			public class ChangeAddress
 			{
-
 				public Guid CompanyId { get; set; }
 
-				public DateTimeOffset ChangedAt { get; set; }
+				//public DateTimeOffset ChangedAt { get; set; }
 
 				public string AddressLine1 { get; set; }
 
@@ -86,7 +85,7 @@ namespace KeepKeeper.Api.Contarcts
 
 				public Guid CompanyId { get; set; }
 
-				public DateTimeOffset RemovedAt { get; set; }
+				//public DateTimeOffset RemovedAt { get; set; }
 
 				public override string ToString() => $"Removing address of company {CompanyId}";
 			}

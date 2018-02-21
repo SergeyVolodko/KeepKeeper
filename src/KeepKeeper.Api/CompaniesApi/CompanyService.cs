@@ -41,23 +41,26 @@ namespace KeepKeeper.Api.CompaniesApi
 
 		public Task Handle(CompanyCommands.V1.ChangeVatNumber command)
 			=> HandleUpdate(command.CompanyId, company =>
-					company.ChangeVatNumber(command.NewVatNumber, command.ChangedAt));
+					company.ChangeVatNumber(
+						command.NewVatNumber,
+						DateTimeOffset.UtcNow));
 
 		public Task Handle(CompanyCommands.V1.AddAddress c)
 			=> HandleUpdate(c.CompanyId, company =>
 						company.AddAddress(
 							new Address(c.AddressLine1, c.AddressLine2, c.AddressCity, c.AddressPostCode, c.AddressCountry),
-							c.AddedAt));
+							DateTimeOffset.UtcNow));
 
 		public Task Handle(CompanyCommands.V1.ChangeAddress c)
 			=> HandleUpdate(c.CompanyId, company =>
 						company.ChangeAddress(
 							new Address(c.AddressLine1, c.AddressLine2, c.AddressCity, c.AddressPostCode, c.AddressCountry),
-							c.ChangedAt));
+							DateTimeOffset.UtcNow));
 
 		public Task Handle(CompanyCommands.V1.RemoveAddress command)
 			=> HandleUpdate(command.CompanyId, company =>
-						company.RemoveAddress(command.RemovedAt));
+						company.RemoveAddress(
+							DateTimeOffset.UtcNow));
 
 		private async Task HandleUpdate(Guid id, Action<Company> update)
 		{
