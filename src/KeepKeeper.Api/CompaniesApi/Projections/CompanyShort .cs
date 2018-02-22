@@ -14,13 +14,13 @@ namespace KeepKeeper.Api.CompaniesApi.Projections
 
 		public override async Task Handle(object e)
 		{
-			ShortCompanyDocument doc;
+			CompanyShortDocument doc;
 			using (var session = _openSession())
 			{
 				switch (e)
 				{
 					case Events.V1.CompanyCreated x:
-						doc = new ShortCompanyDocument
+						doc = new CompanyShortDocument
 						{
 							Id = DocumentId(x.Id),
 							Name = x.Name,
@@ -30,12 +30,12 @@ namespace KeepKeeper.Api.CompaniesApi.Projections
 						break;
 
 					case Events.V1.CompanyRenamed x:
-						doc = await session.LoadAsync<ShortCompanyDocument>(DocumentId(x.Id));
+						doc = await session.LoadAsync<CompanyShortDocument>(DocumentId(x.Id));
 						doc.Name = x.Name;
 						break;
 
 					case Events.V1.CompanyVatNumberChanged x:
-						doc = await session.LoadAsync<ShortCompanyDocument>(DocumentId(x.Id));
+						doc = await session.LoadAsync<CompanyShortDocument>(DocumentId(x.Id));
 						doc.VatNumber = x.VatNumber;
 						break;
 				}
@@ -43,10 +43,10 @@ namespace KeepKeeper.Api.CompaniesApi.Projections
 			}
 		}
 
-		private static string DocumentId(Guid id) => $"ShortCompany/{id}";
+		private static string DocumentId(Guid id) => $"{nameof(CompanyShort)}/{id}";
 	}
 
-	public class ShortCompanyDocument
+	public class CompanyShortDocument
 	{
 		public string Id { get; set; }
 		public string Name { get; set; }

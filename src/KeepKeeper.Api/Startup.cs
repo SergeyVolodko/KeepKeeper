@@ -49,6 +49,8 @@ namespace KeepKeeper.Api
 			await projectionManager.Activate();
 
 			services.AddTransient<CompanyService, CompanyService>();
+			services.AddSingleton<IRepository>(new RavenRepository(
+				openSession));
 
 			services.AddMvc();
 		}
