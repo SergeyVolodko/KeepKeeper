@@ -3,16 +3,16 @@ using System;
 
 namespace KeepKeeper.Framework
 {
-	public interface IRepository
+	public interface IReadRepository
 	{
 		T Load<T>(string documentName, Guid id);
 	}
 
-	public class RavenRepository : IRepository
+	public class RavenReadRepository : IReadRepository
 	{
 		private readonly Func<IAsyncDocumentSession> openSession;
 
-		public RavenRepository(Func<IAsyncDocumentSession> openSession)
+		public RavenReadRepository(Func<IAsyncDocumentSession> openSession)
 		{
 			this.openSession = openSession;
 		}

@@ -49,7 +49,7 @@ namespace KeepKeeper.Api
 			await projectionManager.Activate();
 
 			services.AddTransient<CompanyService, CompanyService>();
-			services.AddSingleton<IRepository>(new RavenRepository(
+			services.AddSingleton<IReadRepository>(new RavenReadRepository(
 				openSession));
 
 			services.AddMvc();

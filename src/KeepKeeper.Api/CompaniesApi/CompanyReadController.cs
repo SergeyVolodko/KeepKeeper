@@ -7,9 +7,9 @@ namespace KeepKeeper.Api.CompaniesApi
 {
 	public class CompanyReadController : Controller
 	{
-		private readonly IRepository repository;
+		private readonly IReadRepository repository;
 
-		public CompanyReadController(IRepository repository)
+		public CompanyReadController(IReadRepository repository)
 		{
 			this.repository = repository;
 		}
