@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using KeepKeeper.Api.CompaniesApi;
+using KeepKeeper.Framework;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
@@ -15,6 +17,10 @@ namespace KeepKeeper.Api
 			{
 				c.SwaggerDoc("v1", new Info { Title = "Event Log API", Version = "v1" });
 			});
+
+
+			services.AddTransient<IAggregateStore, MyAggregateStoreMock>();
+			services.AddTransient<CompanyService, CompanyService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

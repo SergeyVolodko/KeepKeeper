@@ -42,6 +42,8 @@ namespace KeepKeeper.Companies
 			comapny.Apply(new Events.V1.CompanyCreated
 			{
 				Id = Guid.NewGuid(),
+				Name = name,
+				VatNumber = vatNumber,
 				Owner = owner,
 				CreatedAt = createdAt
 			});

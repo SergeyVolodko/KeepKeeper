@@ -8,9 +8,7 @@ namespace KeepKeeper.Api.Contarcts
 		{
 			public class Create
 			{
-				public Guid OwnerId { get; set; }
-				
-				public DateTimeOffset CreatedAt { get; set; }
+				public Guid TenantId { get; set; }
 
 				public string CompanyName { get; set; }
 

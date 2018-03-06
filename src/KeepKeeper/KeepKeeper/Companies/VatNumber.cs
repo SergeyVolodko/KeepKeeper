@@ -10,7 +10,7 @@ namespace KeepKeeper.Companies
 		public VatNumber(string value)
 		{
 			var vatRegex = new Regex("^NL[0-9]{9}B[0-9]{2}$");
-			if (vatRegex.IsMatch(value))
+			if (!vatRegex.IsMatch(value))
 			{
 				throw new ValidationException("VatNumber", "invalid_vat");
 			}

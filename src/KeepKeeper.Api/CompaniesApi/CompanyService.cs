@@ -1,6 +1,7 @@
 ﻿using KeepKeeper.Api.Contarcts;
 using KeepKeeper.Companies;
 using KeepKeeper.Framework;
+using System;
 using System.Threading.Tasks;
 
 namespace KeepKeeper.Api.CompaniesApi
@@ -16,13 +17,13 @@ namespace KeepKeeper.Api.CompaniesApi
 
 		public Task Handle(CompanyCommands.V1.Create command)
 		{
-			var ad = Company.Create(
+			var company = Company.Create(
 				command.CompanyName,
 				command.VatNumber,
-				command.OwnerId,
-				command.CreatedAt);
+				command.TenantId,
+				DateTimeOffset.UtcNow);
 
-			return store.Save(ad);
+			return store.Save(company);
 		}
 
 		public async Task Handle(CompanyCommands.V1.Rename command)
