@@ -31,6 +31,14 @@ namespace KeepKeeper.Companies
 				case Events.V1.CompanyVatNumberChanged x:
 					vatNumber = x.VatNumber;
 					break;
+
+				case Events.V1.CompanyAddressAdded x:
+					address = x.Address;
+					break;
+
+				case Events.V1.CompanyAddressChanged x:
+					address = x.Address;
+					break;
 			}
 		}
 

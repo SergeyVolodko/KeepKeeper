@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\KeepKeeper.Framework\KeepKeeper.Framework.csproj" />
     <ProjectReference Include="..\KeepKeeper\KeepKeeper\KeepKeeper.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,6 @@
 ﻿using KeepKeeper.Framework;
 
-namespace KeepKeeper.Common
+namespace KeepKeeper.Companies
 {
 	public class Address : Value<Address>
 	{

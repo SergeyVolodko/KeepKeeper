@@ -1,5 +1,4 @@
 ﻿using KeepKeeper.Api.Contarcts;
-using KeepKeeper.Common;
 using KeepKeeper.Companies;
 using KeepKeeper.Framework;
 using System;
@@ -21,7 +20,7 @@ namespace KeepKeeper.Api.CompaniesApi
 			var company = Company.Create(
 				command.CompanyName,
 				command.VatNumber,
-				command.OwnerId,
+				command.TenantId,
 				DateTimeOffset.UtcNow);
 
 			return store.Save(company);
