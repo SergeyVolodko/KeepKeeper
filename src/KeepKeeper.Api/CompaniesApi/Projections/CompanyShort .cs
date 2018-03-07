@@ -25,6 +25,7 @@ namespace KeepKeeper.Api.CompaniesApi.Projections
 							Id = DocumentId(x.Id),
 							Name = x.Name,
 							VatNumber = x.VatNumber,
+							Email = x.Email
 						};
 						await session.StoreAsync(doc);
 						break;
@@ -38,6 +39,11 @@ namespace KeepKeeper.Api.CompaniesApi.Projections
 						doc = await session.LoadAsync<CompanyShortDocument>(DocumentId(x.Id));
 						doc.VatNumber = x.VatNumber;
 						break;
+
+					case Events.V1.CompanyEmailChanged x:
+						doc = await session.LoadAsync<CompanyShortDocument>(DocumentId(x.Id));
+						doc.VatNumber = x.Email;
+						break;
 				}
 				await session.SaveChangesAsync();
 			}
@@ -50,6 +56,7 @@ namespace KeepKeeper.Api.CompaniesApi.Projections
 	{
 		public string Id { get; set; }
 		public string Name { get; set; }
+		public string Email { get; set; }
 		public string VatNumber { get; set; }
 	}
 }

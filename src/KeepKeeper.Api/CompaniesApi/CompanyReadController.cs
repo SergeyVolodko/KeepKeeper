@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using KeepKeeper.Api.CompaniesApi.Projections;
 using KeepKeeper.Framework;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,15 @@ namespace KeepKeeper.Api.CompaniesApi
 				nameof(CompanyShort), id);
 
 			return company;
+		}
+
+		[HttpGet]
+		[Route("company/preview")]
+		public IList<CompanyShortDocument> GetCompaniesPreview()
+		{
+			var companies = repository.LoadMany<CompanyShortDocument>();
+
+			return companies;
 		}
 	}
 }

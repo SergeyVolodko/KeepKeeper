@@ -1,11 +1,15 @@
 ﻿using Raven.Client.Documents.Session;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace KeepKeeper.Framework
 {
 	public interface IReadRepository
 	{
 		T Load<T>(string documentName, Guid id);
+		
+		IList<T> LoadMany<T>();
 	}
 
 	public class RavenReadRepository : IReadRepository
@@ -23,6 +27,17 @@ namespace KeepKeeper.Framework
 			{
 				var docId = $"{documentName}/{id}";
 				return session.LoadAsync<T>(docId).Result;
+			}
+		}
+
+		public IList<T> LoadMany<T>()
+		{
+			using (var session = openSession())
+			{
+				return session.Advanced
+					.AsyncDocumentQuery<T>()
+					.ToListAsync()
+					.Result;
 			}
 		}
 	}
