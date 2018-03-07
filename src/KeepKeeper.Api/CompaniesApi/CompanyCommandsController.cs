@@ -33,6 +33,12 @@ namespace KeepKeeper.Api.CompaniesApi
 		}
 
 		[HttpPost]
+		[Route("/change_email")]
+		public Task<IActionResult> ChangeCompanyVatNumber([FromBody]
+			CompanyCommands.V1.ChangeEmail changeEmail)
+			=> HandleOrThrow(changeEmail, c => service.Handle(c));
+
+		[HttpPost]
 		[Route("/change_vat")]
 		public Task<IActionResult> ChangeCompanyVatNumber([FromBody]
 			CompanyCommands.V1.ChangeVatNumber changeVatCommand)

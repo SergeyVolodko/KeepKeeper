@@ -1,5 +1,4 @@
-﻿using KeepKeeper.Common;
-using System;
+﻿using System;
 
 namespace KeepKeeper.Companies
 {
@@ -65,6 +64,16 @@ namespace KeepKeeper.Companies
 				public Guid Id { get; set; }
 				public Address Address { get; set; }
 				public DateTimeOffset ChangedAt { get; set; }
+			}
+
+			internal class CompanyEmailChanged
+			{
+				public Guid Id { get; set; }
+				public Email Email { get; set; }
+				public DateTimeOffset ChangedAt { get; set; }
+
+				public override string ToString()
+					=> $"Comapny {Id} Email changed to '{Email}'";
 			}
 
 			//public class CompanyAddressRemoved

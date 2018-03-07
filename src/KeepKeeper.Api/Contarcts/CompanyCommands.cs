@@ -41,6 +41,16 @@ namespace KeepKeeper.Api.Contarcts
 				public override string ToString() => $"Changing company VAT number {CompanyId}";
 			}
 
+			public class ChangeEmail
+			{
+				public Guid CompanyId { get; set; }
+
+				//public DateTimeOffset ChangedAt { get; set; }
+
+				public string NewEmail { get; set; }
+
+				public override string ToString() => $"Changing company Email {CompanyId}";
+			}
 
 			public class AddAddress
 			{

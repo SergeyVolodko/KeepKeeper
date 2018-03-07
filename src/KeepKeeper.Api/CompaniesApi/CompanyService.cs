@@ -44,6 +44,13 @@ namespace KeepKeeper.Api.CompaniesApi
 						command.NewVatNumber,
 						DateTimeOffset.UtcNow));
 
+		public Task Handle(CompanyCommands.V1.ChangeEmail command)
+			=> HandleUpdate(command.CompanyId, company =>
+					company.ChangeEmail(
+						command.NewEmail,
+						DateTimeOffset.UtcNow));
+
+
 		public Task Handle(CompanyCommands.V1.AddAddress c)
 			=> HandleUpdate(c.CompanyId, company =>
 						company.AddAddress(

@@ -4,9 +4,11 @@ using System;
 
 namespace KeepKeeper.Companies
 {
-    public class Company : Aggregate
+	public class Company : Aggregate
 	{
 		private Name name;
+
+		private Email email;
 
 		private VatNumber vatNumber;
 
@@ -39,12 +41,16 @@ namespace KeepKeeper.Companies
 				case Events.V1.CompanyAddressChanged x:
 					address = x.Address;
 					break;
+
+				case Events.V1.CompanyEmailChanged x:
+					email = x.Email;
+					break;
 			}
 		}
 
 		public static Company Create(
-			Name name, 
-			VatNumber vatNumber, 
+			Name name,
+			VatNumber vatNumber,
 			TenantId tenantId,
 			DateTimeOffset createdAt)
 		{
@@ -70,6 +76,19 @@ namespace KeepKeeper.Companies
 				Id = Id,
 				Name = newName,
 				RenamedAt = renamedAt
+			});
+		}
+
+		public void ChangeEmail(Email email, DateTimeOffset chamgedAt)
+		{
+			if (Version == -1)
+				throw new Exceptions.ComapnyNotFoundException();
+
+			Apply(new Events.V1.CompanyEmailChanged
+			{
+				Id = Id,
+				Email = email,
+				ChangedAt = chamgedAt
 			});
 		}
 
