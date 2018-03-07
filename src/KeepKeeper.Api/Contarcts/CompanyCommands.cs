@@ -8,13 +8,15 @@ namespace KeepKeeper.Api.Contarcts
 		{
 			public class Create
 			{
-				public Guid OwnerId { get; set; }
+				public Guid TenantId { get; set; }
 				
 				//public DateTimeOffset CreatedAt { get; set; }
 
 				public string CompanyName { get; set; }
 
 				public string VatNumber { get; set; }
+
+				public string Email { get; set; }
 
 				public override string ToString() => $"Creating new company";
 			}
@@ -41,6 +43,16 @@ namespace KeepKeeper.Api.Contarcts
 				public override string ToString() => $"Changing company VAT number {CompanyId}";
 			}
 
+			public class ChangeEmail
+			{
+				public Guid CompanyId { get; set; }
+
+				//public DateTimeOffset ChangedAt { get; set; }
+
+				public string NewEmail { get; set; }
+
+				public override string ToString() => $"Changing company Email {CompanyId}";
+			}
 
 			public class AddAddress
 			{

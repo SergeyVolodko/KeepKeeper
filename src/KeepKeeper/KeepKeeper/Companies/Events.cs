@@ -13,6 +13,7 @@ namespace KeepKeeper.Companies
 				public Guid TenantId { get; set; }
 				public string Name { get; set; }
 				public string VatNumber { get; set; }
+				public string Email { get; set; }
 				public DateTimeOffset CreatedAt { get; set; }
 
 				public override string ToString()
@@ -65,6 +66,15 @@ namespace KeepKeeper.Companies
 				public Guid Id { get; set; }
 				public Address Address { get; set; }
 				public DateTimeOffset ChangedAt { get; set; }
+			}
+
+			public class CompanyEmailChanged
+			{
+				public Guid Id { get; set; }
+				public Email Email { get; set; }
+				public DateTimeOffset ChangedAt { get; set; }
+				public override string ToString()
+					=> $"Comapny {Id} Email changed to '{Email}'";
 			}
 
 			//public class CompanyAddressRemoved

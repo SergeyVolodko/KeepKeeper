@@ -72,6 +72,7 @@ namespace KeepKeeper.Api
 			var mapper = new TypeMapper();
 			mapper.Map<Events.V1.CompanyCreated>("CompanyCreated");
 			mapper.Map<Events.V1.CompanyRenamed>("CompanyRenamed");
+			mapper.Map<Events.V1.CompanyEmailChanged>("CompanyEmailChanged");
 			mapper.Map<Events.V1.CompanyVatNumberChanged>("CompanyVatNumberChanged");
 			mapper.Map<Events.V1.CompanyAddressAdded>("CompanyAddressAdded");
 			mapper.Map<Events.V1.CompanyAddressChanged>("CompanyAddressChanged");

@@ -21,7 +21,8 @@ namespace KeepKeeper.Api.CompaniesApi
 			var company = Company.Create(
 				command.CompanyName,
 				command.VatNumber,
-				command.OwnerId,
+				command.Email,
+				command.TenantId,
 				DateTimeOffset.UtcNow);
 
 			return store.Save(company);
@@ -44,6 +45,13 @@ namespace KeepKeeper.Api.CompaniesApi
 					company.ChangeVatNumber(
 						command.NewVatNumber,
 						DateTimeOffset.UtcNow));
+
+		public Task Handle(CompanyCommands.V1.ChangeEmail command)
+			=> HandleUpdate(command.CompanyId, company =>
+					company.ChangeEmail(
+						command.NewEmail,
+						DateTimeOffset.UtcNow));
+
 
 		public Task Handle(CompanyCommands.V1.AddAddress c)
 			=> HandleUpdate(c.CompanyId, company =>
