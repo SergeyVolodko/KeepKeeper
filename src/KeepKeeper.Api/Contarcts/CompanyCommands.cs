@@ -16,6 +16,8 @@ namespace KeepKeeper.Api.Contarcts
 
 				public string VatNumber { get; set; }
 
+				public string Email { get; set; }
+
 				public override string ToString() => $"Creating new company";
 			}
 

@@ -20,6 +20,7 @@ namespace KeepKeeper.Api.CompaniesApi
 			var company = Company.Create(
 				command.CompanyName,
 				command.VatNumber,
+				command.Email,
 				command.TenantId,
 				DateTimeOffset.UtcNow);
 

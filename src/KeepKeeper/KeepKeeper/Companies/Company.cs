@@ -51,6 +51,7 @@ namespace KeepKeeper.Companies
 		public static Company Create(
 			Name name,
 			VatNumber vatNumber,
+			Email email,
 			TenantId tenantId,
 			DateTimeOffset createdAt)
 		{
@@ -59,6 +60,7 @@ namespace KeepKeeper.Companies
 			{
 				Id = Guid.NewGuid(),
 				Name = name,
+				Email = email,
 				VatNumber = vatNumber,
 				TenantId = tenantId,
 				CreatedAt = createdAt

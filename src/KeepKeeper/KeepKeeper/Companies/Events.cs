@@ -11,6 +11,7 @@ namespace KeepKeeper.Companies
 				public Guid Id { get; set; }
 				public Guid TenantId { get; set; }
 				public string Name { get; set; }
+				public string Email { get; set; }
 				public string VatNumber { get; set; }
 				public DateTimeOffset CreatedAt { get; set; }
 
@@ -66,7 +67,7 @@ namespace KeepKeeper.Companies
 				public DateTimeOffset ChangedAt { get; set; }
 			}
 
-			internal class CompanyEmailChanged
+			public class CompanyEmailChanged
 			{
 				public Guid Id { get; set; }
 				public Email Email { get; set; }
