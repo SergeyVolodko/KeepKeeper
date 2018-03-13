@@ -1,10 +1,10 @@
-﻿using KeepKeeper.Companies;
+﻿using System;
+using System.Threading.Tasks;
+using KeepKeeper.Companies;
 using KeepKeeper.Framework;
 using Raven.Client.Documents.Session;
-using System;
-using System.Threading.Tasks;
 
-namespace KeepKeeper.Api.CompaniesApi.Projections
+namespace KeepKeeper.Api.Projections
 {
 	public class CompanyShort : Projection
 	{
@@ -24,7 +24,6 @@ namespace KeepKeeper.Api.CompaniesApi.Projections
 						{
 							Id = DocumentId(x.Id),
 							Name = x.Name,
-							VatNumber = x.VatNumber,
 							Email = x.Email
 						};
 						await session.StoreAsync(doc);
@@ -35,14 +34,9 @@ namespace KeepKeeper.Api.CompaniesApi.Projections
 						doc.Name = x.Name;
 						break;
 
-					case Events.V1.CompanyVatNumberChanged x:
-						doc = await session.LoadAsync<CompanyShortDocument>(DocumentId(x.Id));
-						doc.VatNumber = x.VatNumber;
-						break;
-
 					case Events.V1.CompanyEmailChanged x:
 						doc = await session.LoadAsync<CompanyShortDocument>(DocumentId(x.Id));
-						doc.VatNumber = x.Email;
+						doc.Email = x.Email;
 						break;
 				}
 				await session.SaveChangesAsync();
@@ -57,6 +51,5 @@ namespace KeepKeeper.Api.CompaniesApi.Projections
 		public string Id { get; set; }
 		public string Name { get; set; }
 		public string Email { get; set; }
-		public string VatNumber { get; set; }
 	}
 }

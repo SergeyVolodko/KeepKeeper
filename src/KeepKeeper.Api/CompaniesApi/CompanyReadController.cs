@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using KeepKeeper.Api.CompaniesApi.Projections;
+using KeepKeeper.Api.Projections;
 using KeepKeeper.Framework;
 using Microsoft.AspNetCore.Mvc;
 
