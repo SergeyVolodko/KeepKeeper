@@ -1,5 +1,4 @@
 ﻿using KeepKeeper.Api.CompaniesApi;
-using KeepKeeper.Api.CompaniesApi.Projections;
 using KeepKeeper.Companies;
 using KeepKeeper.Framework;
 using Microsoft.AspNetCore.Builder;
@@ -13,6 +12,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using KeepKeeper.Api.Projections;
 
 namespace KeepKeeper.Api
 {
@@ -45,7 +45,7 @@ namespace KeepKeeper.Api
 				new RavenCheckpointStore(openSession),
 				new JsonNetSerializer(),
 				typeMapper,
-				new[] { new CompanyShort(openSession), });
+				new Projection[] { new CompanyShort(openSession), new CompanyDetailed(openSession), });
 			await projectionManager.Activate();
 
 			services.AddTransient<CompanyService, CompanyService>();
