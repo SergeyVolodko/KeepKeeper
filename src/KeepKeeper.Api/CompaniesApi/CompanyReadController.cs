@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using KeepKeeper.Api.Projections;
 using KeepKeeper.Framework;
 using Microsoft.AspNetCore.Mvc;
@@ -13,16 +12,6 @@ namespace KeepKeeper.Api.CompaniesApi
 		public CompanyReadController(IReadRepository repository)
 		{
 			this.repository = repository;
-		}
-
-		[HttpGet]
-		[Route("company/preview/{id}")]
-		public CompanyShortDocument GetCompanyPreview(Guid id)
-		{
-			var company = repository.Load<CompanyShortDocument>(
-				nameof(CompanyShort), id);
-
-			return company;
 		}
 
 		[HttpGet]
